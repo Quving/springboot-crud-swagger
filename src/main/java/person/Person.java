@@ -5,6 +5,7 @@ import java.util.UUID;
 public class Person {
     private String _name;
     private UUID _uuid;
+    private Location _location;
 
 
     public Person(String name) {
@@ -12,21 +13,27 @@ public class Person {
         _uuid = UUID.randomUUID();
     }
 
-    /**
-     * Returns the UUID.
-     *
-     * @return
-     */
-    public UUID getUUID() {
+    public String getName() {
+        return _name;
+    }
+
+    public void setName(String name) {
+        this._name = name;
+    }
+
+    public UUID getUuid() {
         return _uuid;
     }
 
-    /**
-     * Returns the name.
-     *
-     * @return
-     */
-    public String getName() {
-        return _name;
+    public void setUuid(UUID uuid) {
+        this._uuid = uuid;
+    }
+
+    public Location getLocation() {
+        return _location;
+    }
+
+    public void setLocation(Location location) {
+        this._location = location;
     }
 }
