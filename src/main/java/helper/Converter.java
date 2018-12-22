@@ -11,11 +11,8 @@ import java.io.ObjectOutputStream;
 
 /*
  * Creates a class which have two function getByteArrayObject and getJavaObject.
- *
  * getByteArrayObject converts a java object into byte[] and return the byte[].
- *
  * getJavaObject converts a byte[] to java object. and return SimpleExample object.
- *
  */
 public class Converter {
     /**
