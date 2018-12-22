@@ -1,0 +1,22 @@
+---
+stack: vngu/curilab
+version: '0.0.1'
+description: curilab
+services:
+  db:
+    image: mongo:latest
+    instances: 1
+    affinity:
+      - node==orange
+    stateful: yes
+    volumes:
+      - /srv/curilab:/data/db
+    links:
+      - system/lb
+    ports:
+      - 27072:27017
+    environment:
+      - TZ=Europe/Berlin
+
+
+
