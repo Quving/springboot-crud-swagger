@@ -4,10 +4,7 @@ package helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 /*
  * Creates a class which have two function getByteArrayObject and getJavaObject.
@@ -55,6 +52,20 @@ public class Converter {
             e.printStackTrace();
         }
         return jsonstring;
+    }
+
+
+    public <T> T getObjectFromJsonString(String str, Class<T> cls) {
+        ObjectMapper omapper = new ObjectMapper();
+        T o = null;
+        try {
+            o = omapper.readValue(str, cls);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return o;
     }
 
     /**
