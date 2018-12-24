@@ -5,6 +5,7 @@ import java.util.UUID;
 public class Person {
     private String _name;
     private UUID _uuid;
+    protected String _type;
     private Location _location;
 
 
