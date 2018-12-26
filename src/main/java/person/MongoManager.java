@@ -5,8 +5,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
-import java.net.UnknownHostException;
-
 public class MongoManager {
 
     private static MongoManager instance;
@@ -27,7 +25,7 @@ public class MongoManager {
         String mongo_uri = System.getenv("MONGO_DB_URL");
         System.out.println(mongo_uri);
         _mongoclient = new MongoClient(new MongoClientURI(mongo_uri));
-        _db = _mongoclient.getDB("curilab");
+        _db = (DB) _mongoclient.getDatabase("curilab");
         _patient_collection = _db.getCollection("patients");
         _nurse_collection = _db.getCollection("nurses");
     }
