@@ -24,16 +24,12 @@ public class MongoManager {
     }
 
     public MongoManager() {
-        try {
-            String mongo_uri = System.getenv("MONGO_DB_URL");
-            System.out.println(mongo_uri);
-            _mongoclient = new MongoClient(new MongoClientURI(mongo_uri));
-            _db = _mongoclient.getDB("curilab");
-            _patient_collection = _db.getCollection("patients");
-            _nurse_collection = _db.getCollection("nurses");
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        String mongo_uri = System.getenv("MONGO_DB_URL");
+        System.out.println(mongo_uri);
+        _mongoclient = new MongoClient(new MongoClientURI(mongo_uri));
+        _db = _mongoclient.getDB("curilab");
+        _patient_collection = _db.getCollection("patients");
+        _nurse_collection = _db.getCollection("nurses");
     }
 
     public static MongoManager getInstance() {
