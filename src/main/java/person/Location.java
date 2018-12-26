@@ -17,6 +17,10 @@ public class Location {
         _other = other;
     }
 
+    public Location() {
+
+    }
+
 
     public String get_country() {
         return _country;
