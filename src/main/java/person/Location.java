@@ -1,11 +1,6 @@
 package person;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
-
-import java.io.IOException;
 
 public class Location {
     private String _street;
