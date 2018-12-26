@@ -1,0 +1,18 @@
+image: maven:3.6
+
+variables:
+  MONGO_DB_URL: "mongo"
+
+services:
+  - mongo:latest
+
+build:
+  stage: build
+  script:
+  - mvn compile
+
+test:
+  stage: test
+  script:
+  - mvn  test
+
