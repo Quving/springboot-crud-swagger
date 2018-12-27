@@ -1,14 +1,13 @@
 package person;
 
-import com.mongodb.BasicDBObject;
+import exception.NurseAlreadyExistsException;
 import exception.PatientAlreadyExistsException;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PersonManagerTest {
     @Test
@@ -38,8 +37,8 @@ public class PersonManagerTest {
     public void getNurse() {
     }
 
-    @Test
-    public void addNurse() {
+    @Test(expected = NurseAlreadyExistsException.class)
+    public void addNurse() throws NurseAlreadyExistsException {
         UUID uuid1 = UUID.fromString("866f74aa-0472-40d8-99b0-799391a06e3b");
         UUID uuid2 = UUID.fromString("44ff17a3-1d91-4382-803e-80db767fcdd3");
 
