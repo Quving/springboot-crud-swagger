@@ -3,14 +3,16 @@ package person;
 import java.util.UUID;
 
 public class Person {
-    private String _name;
-    private UUID _uuid;
-    private Location _location;
+    protected String _name;
+    protected UUID _uuid;
+    protected String _type;
+    protected Location _location;
 
 
     public Person(String name) {
         _name = name;
         _uuid = UUID.randomUUID();
+        _location = new Location();
     }
 
     public String getName() {

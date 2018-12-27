@@ -1,0 +1,35 @@
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay
+
+stages:
+  - build
+  - test
+  - publish
+  - deploy
+
+variables:
+  LATEST: $CI_REGISTRY_IMAGE:latest
+
+build-container:
+  stage: build
+  script:
+    - docker build -t $LATEST .
+
+test:
+  stage: test
+  script:
+    - docker run --rm -d --name mongodb-test mongo:latest
+    - docker run --rm --link mongodb-test:mongo -e MONGO_DB_URL=mongodb://mongo $LATEST sh -c "mvn test"
+  after_script:
+    - docker rm -f mongodb-test
+
+publish-image:
+  stage: publish
+  only:
+    - master
+  before_script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - docker push $LATEST
