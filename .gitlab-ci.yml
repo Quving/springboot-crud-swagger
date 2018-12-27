@@ -1,18 +1,36 @@
-image: maven:3.6
+image: docker:latest
 
 variables:
-  MONGO_DB_URL: "mongo"
+  DOCKER_DRIVER: overlay
 
-services:
-  - mongo:latest
+stages:
+  - build
+  - test
+  - publish
+  - deploy
 
-build:
+variables:
+  LATEST: $CI_REGISTRY_IMAGE:latest
+
+build-container:
   stage: build
   script:
-  - mvn compile
+    - docker build -t $LATEST .
 
 test:
   stage: test
   script:
-  - mvn  test
+    - docker run --rm -d --name mongodb-test mongo:latest
+    - docker run --rm --link mongodb-test:mongo -e MONGO_DB_URL=mongo $LATEST sh -c "mvn test"
+    - docker push $LATEST
+  after_script:
+    - docker rm -f mongodb-test
 
+publish-image:
+  stage: publish
+  only:
+    - master
+  before_script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - docker push $LATEST
