@@ -22,7 +22,6 @@ test:
   script:
     - docker run --rm -d --name mongodb-test mongo:latest
     - docker run --rm --link mongodb-test:mongo -e MONGO_DB_URL=mongodb://mongo $LATEST sh -c "mvn test"
-    - docker push $LATEST
   after_script:
     - docker rm -f mongodb-test
 
