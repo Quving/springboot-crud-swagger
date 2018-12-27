@@ -1,9 +1,15 @@
 package person;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.DBCollectionUpdateOptions;
+import com.mongodb.client.model.UpdateOptions;
+import exception.NurseAlreadyExistsException;
 import exception.NurseNotExistException;
+import exception.PatientAlreadyExistsException;
 import exception.PatientNotExistException;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.UUID;
 
@@ -20,7 +26,7 @@ public class PersonManager {
     public Nurse getNurse(UUID uuid) throws NurseNotExistException {
         Nurse nurse = null;
         BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-        nurse = Nurse.fromJson(MongoManager.getInstance().getNurseCollection().findOne(query).toString());
+        nurse = Nurse.fromJson(MongoManager.getInstance().getNurseCollection().find(query).toString());
 
         if (nurse == null) {
             throw new NurseNotExistException(String.format("Nurse %s does not exist", uuid.toString()));
@@ -32,7 +38,7 @@ public class PersonManager {
     public Patient getPatient(UUID uuid) throws PatientNotExistException {
         Patient patient = null;
         BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-        patient = Patient.fromJson(MongoManager.getInstance().getPatientCollection().findOne(query).toString());
+        patient = Patient.fromJson(MongoManager.getInstance().getPatientCollection().find(query).toString());
 
         if (patient == null) {
             throw new PatientNotExistException(String.format("Nurse %s does not exist", uuid.toString()));
@@ -41,22 +47,36 @@ public class PersonManager {
         }
     }
 
-    public void addNurse(Nurse nurse) {
-        BasicDBObject update = BasicDBObject.parse(nurse.toJson());
-        BasicDBObject query = new BasicDBObject("uuid", nurse.getUuid().toString());
-        DBCollectionUpdateOptions options = new DBCollectionUpdateOptions().upsert(true);
-        MongoManager.getInstance().getNurseCollection().update(query, update, options);
+    public void addNurse(Nurse nurse) throws NurseAlreadyExistsException {
+        Bson update = Document.parse(nurse.toJson());
+        if (!nurseExists(nurse.getUuid()))
+            MongoManager.getInstance().getNurseCollection().insertOne(update);
+        else
+            throw new NurseAlreadyExistsException(String.format("Patient %s already exists.", nurse.getUuid().toString()));
     }
 
-    public void addPatient(Patient patient) {
-        BasicDBObject update = BasicDBObject.parse(patient.toJson());
-        BasicDBObject query = new BasicDBObject("uuid", patient.getUuid().toString());
-        DBCollectionUpdateOptions options = new DBCollectionUpdateOptions().upsert(true);
-        MongoManager.getInstance().getPatientCollection().update(query, update, options);
+    public boolean nurseExists(UUID uuid) {
+        Bson query = new BasicDBObject("uuid", uuid.toString());
+        FindIterable doc = MongoManager.getInstance().getNurseCollection().find(query);
+        return doc.first() != null;
+    }
+
+    public boolean patientExists(UUID uuid) {
+        Bson query = new BasicDBObject("uuid", uuid.toString());
+        FindIterable doc = MongoManager.getInstance().getPatientCollection().find(query);
+        return doc.first() != null;
+    }
+
+    public void addPatient(Patient patient) throws PatientAlreadyExistsException {
+        Bson update = Document.parse(patient.toJson());
+        if (!patientExists(patient.getUuid()))
+            MongoManager.getInstance().getPatientCollection().insertOne(update);
+        else
+            throw new PatientAlreadyExistsException(String.format("Patient %s already exists.", patient.getUuid().toString()));
     }
 
     public int countNurse(BasicDBObject query) {
-        return (int) MongoManager.getInstance().getNurseCollection().count(query);
+        return (int) MongoManager.getInstance().getNurseCollection().countDocuments(query);
     }
 
     public int countPatient(BasicDBObject query) {
