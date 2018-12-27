@@ -1,7 +1,5 @@
 package person;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -31,7 +29,6 @@ public class MongoManager {
         _patient_collection = _db.getCollection("patients");
         _nurse_collection = _db.getCollection("nurses");
     }
-
 
     public static MongoManager getInstance() {
         if (MongoManager.instance == null) {
