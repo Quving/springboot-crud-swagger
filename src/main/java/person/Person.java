@@ -13,6 +13,7 @@ public class Person {
         _name = name;
         _uuid = UUID.randomUUID();
         _location = new Location();
+
     }
 
     public String getName() {
@@ -37,5 +38,12 @@ public class Person {
 
     public void setLocation(Location location) {
         this._location = location;
+    }
+
+    public boolean equals(Person person) {
+        return _name.equals(person._name) &&
+                _uuid.equals(person._uuid) &&
+                _type.equals(person._type) &&
+                _location.equals(person._location);
     }
 }

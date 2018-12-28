@@ -10,6 +10,7 @@ import exception.PatientAlreadyExistsException;
 import exception.PatientNotExistException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.json.JSONObject;
 
 import java.util.UUID;
 
@@ -26,8 +27,8 @@ public class PersonManager {
     public Nurse getNurse(UUID uuid) throws NurseNotExistException {
         Nurse nurse = null;
         BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-        nurse = Nurse.fromJson(MongoManager.getInstance().getNurseCollection().find(query).toString());
-
+        Document doc = (Document) MongoManager.getInstance().getNurseCollection().find(query).first();
+        nurse = Nurse.fromJson(doc.toJson());
         if (nurse == null) {
             throw new NurseNotExistException(String.format("Nurse %s does not exist", uuid.toString()));
         } else {
@@ -38,8 +39,8 @@ public class PersonManager {
     public Patient getPatient(UUID uuid) throws PatientNotExistException {
         Patient patient = null;
         BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-        patient = Patient.fromJson(MongoManager.getInstance().getPatientCollection().find(query).toString());
-
+        Document doc = (Document) MongoManager.getInstance().getPatientCollection().find(query).first();
+        patient = Patient.fromJson(doc.toJson());
         if (patient == null) {
             throw new PatientNotExistException(String.format("Nurse %s does not exist", uuid.toString()));
         } else {
@@ -73,14 +74,6 @@ public class PersonManager {
             MongoManager.getInstance().getPatientCollection().insertOne(update);
         else
             throw new PatientAlreadyExistsException(String.format("Patient %s already exists.", patient.getUuid().toString()));
-    }
-
-    public int countNurse(BasicDBObject query) {
-        return (int) MongoManager.getInstance().getNurseCollection().countDocuments(query);
-    }
-
-    public int countPatient(BasicDBObject query) {
-        return (int) MongoManager.getInstance().getPatientCollection().count(query);
     }
 
     public void deletePatient(UUID uuid) {
