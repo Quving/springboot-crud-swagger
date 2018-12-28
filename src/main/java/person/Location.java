@@ -23,7 +23,6 @@ public class Location {
         _country = "";
         _postalzip = "";
         _other = "";
-
     }
 
 
@@ -34,7 +33,6 @@ public class Location {
     public void set_country(String _country) {
         this._country = _country;
     }
-
 
     public String getStreet() {
         return _street;

@@ -2,15 +2,12 @@ package person;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.model.DBCollectionUpdateOptions;
-import com.mongodb.client.model.UpdateOptions;
 import exception.NurseAlreadyExistsException;
 import exception.NurseNotExistException;
 import exception.PatientAlreadyExistsException;
 import exception.PatientNotExistException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.json.JSONObject;
 
 import java.util.UUID;
 
