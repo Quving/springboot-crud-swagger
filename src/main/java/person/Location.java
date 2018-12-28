@@ -18,6 +18,11 @@ public class Location {
     }
 
     public Location() {
+        _street = "";
+        _city = "";
+        _country = "";
+        _postalzip = "";
+        _other = "";
 
     }
 
