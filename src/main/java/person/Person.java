@@ -1,10 +1,15 @@
 package person;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.UUID;
 
+@Document(collection = "persons")
 public class Person {
-    protected String _name;
+    @Id
     protected UUID _uuid;
+    protected String _name;
     protected String _type;
     protected Location _location;
 
@@ -13,7 +18,6 @@ public class Person {
         _name = name;
         _uuid = UUID.randomUUID();
         _location = new Location();
-
     }
 
     public String getName() {
