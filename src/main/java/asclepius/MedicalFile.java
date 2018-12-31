@@ -1,6 +1,4 @@
-package file;
-
-import file.File;
+package asclepius;
 
 public class MedicalFile extends File {
 
