@@ -1,11 +1,11 @@
-package person;
+package asclepius;
 
 import org.json.JSONObject;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "nurses")
-public class Nurse extends Person {
-    public Nurse(String name) {
+@Document(collection = "patients")
+public class Patient extends Person {
+    public Patient(String name) {
         super(name);
     }
 
@@ -19,10 +19,11 @@ public class Nurse extends Person {
         return jo.toString();
     }
 
-    public static Nurse fromJson(String json) {
+    public static Patient fromJson(String json) {
         JSONObject jo = new JSONObject(json);
-        Nurse nurse = new Nurse(jo.getString("name"));
-        nurse.setLocation(Location.fromJson(jo.getString("location")));
-        return nurse;
+        Patient patient = new Patient(jo.getString("name"));
+        patient.setLocation(Location.fromJson(jo.getString("location")));
+
+        return patient;
     }
 }

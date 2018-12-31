@@ -1,6 +1,5 @@
-package person;
+package asclepius;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

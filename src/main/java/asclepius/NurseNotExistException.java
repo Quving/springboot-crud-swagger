@@ -1,4 +1,4 @@
-package exception;
+package asclepius;
 
 public class NurseNotExistException extends Exception {
     public NurseNotExistException(String errorMessage) {
