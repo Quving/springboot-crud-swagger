@@ -3,6 +3,17 @@ stack: vngu/curilab
 version: '0.0.1'
 description: curilab
 services:
+  api:
+    image: registry.gitlab.com/curilab/asclepius:latest
+    instances: 1
+    environment:
+      - KONTENA_LB_INTERNAL_PORT=8080
+      - KONTENA_LB_VIRTUAL_HOSTS=api.curilab.quving.com
+    links:
+      - system/lb
+    environment:
+      - TZ=Europe/Berlin
+
   db:
     image: mongo:latest
     instances: 1
@@ -17,6 +28,3 @@ services:
       - 27072:27017
     environment:
       - TZ=Europe/Berlin
-
-
-
