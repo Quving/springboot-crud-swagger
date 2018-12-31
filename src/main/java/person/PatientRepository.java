@@ -2,11 +2,9 @@ package person;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+import java.util.UUID;
 
 public interface PersonRepository extends MongoRepository<Person, String> {
-    public Person findByFirstName(String firstName);
 
-    public List<Person> findByLastName(String lastName);
 }
 
