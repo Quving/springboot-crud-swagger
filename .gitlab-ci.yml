@@ -36,5 +36,4 @@ deploy:
   image: $CI_REGISTRY/curilab/hermes:latest
   stage: deploy
   script:
-    - echo $KONTENA_URL
     - kontena stack upgrade --force $STACK_NAME || kontena stack install --name $STACK_NAME
