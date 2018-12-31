@@ -11,6 +11,7 @@ services:
       - KONTENA_LB_VIRTUAL_HOSTS=api.curilab.quving.com
     links:
       - system/lb
+      - db
     environment:
       - TZ=Europe/Berlin
 
