@@ -5,10 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Document(collection = "persons")
 public class Person {
     @Id
-    protected UUID _uuid;
+    protected String _uuid;
     protected String _name;
     protected String _type;
     protected Location _location;
@@ -16,7 +15,7 @@ public class Person {
 
     public Person(String name) {
         _name = name;
-        _uuid = UUID.randomUUID();
+        _uuid = UUID.randomUUID().toString();
         _location = new Location();
     }
 
@@ -28,11 +27,11 @@ public class Person {
         this._name = name;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return _uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this._uuid = uuid;
     }
 
@@ -44,7 +43,7 @@ public class Person {
         this._location = location;
     }
 
-    public boolean equals(Person person) {
+    protected boolean equals(Person person) {
         return _name.equals(person._name) &&
                 _uuid.equals(person._uuid) &&
                 _type.equals(person._type) &&

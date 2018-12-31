@@ -1,11 +1,12 @@
 package person;
 
 import org.json.JSONObject;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "patients")
 public class Patient extends Person {
     public Patient(String name) {
         super(name);
-        _type = "patient";
     }
 
     public String toJson() {

@@ -7,36 +7,35 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping("/nurse")
-public class NurseController {
+@RequestMapping("/patient")
+public class PatientController {
     @Autowired
-    private NurseService _nurseService;
-    private static final String template = "Hello, %s!";
+    private PatientService _patientService;
     private final AtomicLong counter = new AtomicLong();
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    public void addNurse(@RequestBody Nurse person) {
-        _nurseService.addNurse(person);
+    public void addPatient(@RequestBody Patient person) {
+        _patientService.addPatient(person);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
-    public void getNurse(@PathVariable String uuid) {
-        _nurseService.getNurse(uuid);
+    public void getPatient(@PathVariable String uuid) {
+        _patientService.getPatient(uuid);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
-    public void deleteNurse(String uuid) {
-        _nurseService.deleteNurse(uuid);
+    public void deletePatient(String uuid) {
+        _patientService.deletePatient(uuid);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")
-    public void updateNurse(@RequestBody Nurse person, @PathVariable String id) {
-        _nurseService.updateNurse(id, person);
+    public void updatePatient(@RequestBody Patient person, @PathVariable String id) {
+        _patientService.updatePatient(id, person);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public List<Nurse> getAllNurse() {
-        return _nurseService.getAllNurse();
+    public List<Patient> getAllPatients() {
+        return _patientService.getAllPatients();
     }
 }
