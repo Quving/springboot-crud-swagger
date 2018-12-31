@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/nurse")
 public class NurseController {
     @Autowired
     private NurseService _nurseService;
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public void addNurse(@RequestBody Nurse person) {

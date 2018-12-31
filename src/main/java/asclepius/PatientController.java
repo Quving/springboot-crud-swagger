@@ -11,8 +11,6 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PatientController {
     @Autowired
     private PatientService _patientService;
-    private final AtomicLong counter = new AtomicLong();
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public void addPatient(@RequestBody Patient person) {
