@@ -11,7 +11,7 @@ stages:
 
 variables:
   LATEST: $CI_REGISTRY_IMAGE:latest
-
+  STACK_NAME: curilab
 build-container:
   stage: build
   script:
@@ -27,9 +27,13 @@ test:
 
 publish-image:
   stage: publish
-  only:
-    - master
   before_script:
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script:
     - docker push $LATEST
+
+deploy:
+  image: $CI_REGISTRY/curilab/hermes:latest
+  stage: deploy
+  script:
+    - kontena stack upgrade --force $STACK_NAME || kontena stack install --name $STACK_NAME
