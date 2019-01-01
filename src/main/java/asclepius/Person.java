@@ -1,17 +1,20 @@
-package person;
+package asclepius;
+
+import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
 public class Person {
+    @Id
+    protected String _uuid;
     protected String _name;
-    protected UUID _uuid;
     protected String _type;
     protected Location _location;
 
 
     public Person(String name) {
         _name = name;
-        _uuid = UUID.randomUUID();
+        _uuid = UUID.randomUUID().toString();
         _location = new Location();
     }
 
@@ -23,11 +26,11 @@ public class Person {
         this._name = name;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return _uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this._uuid = uuid;
     }
 
@@ -37,5 +40,12 @@ public class Person {
 
     public void setLocation(Location location) {
         this._location = location;
+    }
+
+    protected boolean equals(Person person) {
+        return _name.equals(person._name) &&
+                _uuid.equals(person._uuid) &&
+                _type.equals(person._type) &&
+                _location.equals(person._location);
     }
 }
