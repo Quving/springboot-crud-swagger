@@ -7,13 +7,12 @@ services:
     image: registry.gitlab.com/curilab/asclepius:latest
     instances: 1
     environment:
-      - KONTENA_LB_INTERNAL_PORT=8080
-      - KONTENA_LB_VIRTUAL_HOSTS=api.curilab.quving.com
+      - KONTENA_LB_INTERNAL_PORT=5555
+      - KONTENA_LB_VIRTUAL_HOSTS=curilab.quving.com
       - TZ=Europe/Berlin
     links:
       - system/lb
       - db
-    environment:
 
   db:
     image: mongo:latest
