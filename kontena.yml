@@ -8,7 +8,7 @@ services:
     instances: 1
     environment:
       - KONTENA_LB_INTERNAL_PORT=5555
-      - KONTENA_LB_VIRTUAL_HOSTS=curilab.quving.com
+      - KONTENA_LB_VIRTUAL_HOSTS=curilab-api.quving.com
       - TZ=Europe/Berlin
     links:
       - system/lb
