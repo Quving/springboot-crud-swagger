@@ -1,5 +1,8 @@
 package asclepius;
 
-public class MedicalFile extends File {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "medicalfiles")
+public class Medicalfile extends File {
 
 }
