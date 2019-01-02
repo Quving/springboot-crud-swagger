@@ -13,7 +13,6 @@ import java.util.UUID;
 public class Medicalfile {
     @Id
     private String uuid;
-
     private String nurseId;
     private List<String> patientIds;
 
@@ -23,12 +22,13 @@ public class Medicalfile {
         patientIds = new ArrayList<>();
     }
 
+
     public String getNurseUuid() {
         return nurseId;
     }
 
-    public void setNurseUuid(String _nurse_uuid) {
-        this.nurseId = _nurse_uuid;
+    public void setNurseUuid(String nurse_uuid) {
+        this.nurseId = nurse_uuid;
     }
 
     public List<String> getPatientIds() {
@@ -46,5 +46,13 @@ public class Medicalfile {
     public void addPatient(String uuid) {
         if (Helper.isUUID(uuid))
             patientIds.add(uuid);
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

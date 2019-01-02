@@ -12,8 +12,8 @@ public class NurseController {
     private NurseService _nurseService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    public void addNurse(@RequestBody Nurse person) {
-        _nurseService.addNurse(person);
+    public void addNurse(@RequestBody Nurse nurse) {
+        _nurseService.addNurse(nurse);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
