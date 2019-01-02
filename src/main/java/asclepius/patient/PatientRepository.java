@@ -1,4 +1,4 @@
-package asclepius;
+package asclepius.patient;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
