@@ -1,20 +1,21 @@
 package asclepius.patient;
 
 import asclepius.Location;
+import asclepius.MongoDocument;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document(collection = "patients")
-public class Patient {
-    @Id
-    private String uuid;
+public class Patient extends MongoDocument {
     private String name;
 
-    public String getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
