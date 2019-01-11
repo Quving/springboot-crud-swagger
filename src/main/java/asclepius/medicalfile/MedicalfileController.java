@@ -14,31 +14,40 @@ import java.util.UUID;
 public class MedicalfileController {
     private Logger logger = LoggerFactory.getLogger(MedicalfileController.class);
     @Autowired
-    private MedicalfileService _medicalfileService;
+    private MedicalfileService medicalfileService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public void addMedicalfile(@RequestBody Medicalfile medicalfile) {
-        logger.info(medicalfile.getNurseUuid().toString());
-        _medicalfileService.addMedicalfile(medicalfile);
+        medicalfileService.addMedicalfile(medicalfile);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{medicalfile_id}/add/nurse/{nurse_id}")
+    public void addNurseToMedicalfile(@PathVariable String medicalfile_id, @PathVariable String nurse_id) {
+        medicalfileService.addNurseToMedicalfile(UUID.fromString(medicalfile_id), UUID.fromString(nurse_id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{medicalfile_id}/remove/nurse/{nurse_id}")
+    public void removeNurseFromMedicalfile(@PathVariable String medicalfile_id, @PathVariable String nurse_id) {
+        medicalfileService.removeNurseFromMedicalfile(UUID.fromString(medicalfile_id), UUID.fromString(nurse_id));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
     public Optional<Medicalfile> getMedicalfile(@PathVariable String id) {
-        return _medicalfileService.getMedicalfile(UUID.fromString(id));
+        return medicalfileService.getMedicalfile(UUID.fromString(id));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     public void deleteMedicalfile(@PathVariable String id) {
-        _medicalfileService.deleteMedicalfile(UUID.fromString(id));
+        medicalfileService.deleteMedicalfile(UUID.fromString(id));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")
     public void updateMedicalfile(@RequestBody Medicalfile medicalfile, @PathVariable String id) {
-        _medicalfileService.updateMedicalfile(UUID.fromString(id), medicalfile);
+        medicalfileService.updateMedicalfile(UUID.fromString(id), medicalfile);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<Medicalfile> getAllMedicalfile() {
-        return _medicalfileService.getAllMedicalfile();
+        return medicalfileService.getAllMedicalfile();
     }
 }
