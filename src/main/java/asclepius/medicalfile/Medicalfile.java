@@ -38,4 +38,12 @@ public class Medicalfile extends MongoDocument {
         if (nurses.contains(uuid))
             nurses.remove(uuid);
     }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 }
