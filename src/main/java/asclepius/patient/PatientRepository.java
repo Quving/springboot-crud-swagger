@@ -2,7 +2,9 @@ package asclepius.patient;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface PatientRepository extends MongoRepository<Patient, String> {
+import java.util.UUID;
+
+public interface PatientRepository extends MongoRepository<Patient, UUID> {
 
 }
 
