@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -18,18 +19,18 @@ public class NurseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
-    public void getNurse(@PathVariable UUID uuid) {
-        _nurseService.getNurse(uuid);
+    public Optional<Nurse> getNurse(@PathVariable String id) {
+        return _nurseService.getNurse(UUID.fromString(id));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
-    public void deleteNurse(@PathVariable UUID uuid) {
-        _nurseService.deleteNurse(uuid);
+    public void deleteNurse(@PathVariable String id) {
+        _nurseService.deleteNurse(UUID.fromString(id));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")
-    public void updateNurse(@RequestBody Nurse person, @PathVariable UUID id) {
-        _nurseService.updateNurse(id, person);
+    public void updateNurse(@RequestBody Nurse person, @PathVariable String id) {
+        _nurseService.updateNurse(UUID.fromString(id), person);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")

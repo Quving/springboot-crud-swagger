@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,8 +21,8 @@ public class MedicalfileService {
         medicalfileRepository.save(patient);
     }
 
-    public void getMedicalfile(UUID uuid) {
-        medicalfileRepository.findById(uuid);
+    public Optional<Medicalfile> getMedicalfile(UUID uuid) {
+        return medicalfileRepository.findById(uuid);
     }
 
     public void updateMedicalfile(UUID id, Medicalfile patient) {
