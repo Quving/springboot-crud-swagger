@@ -2,13 +2,8 @@ package asclepius.medicalfile;
 
 import asclepius.MongoDocument;
 import asclepius.patient.Patient;
-import asclepius.util.Helper;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
