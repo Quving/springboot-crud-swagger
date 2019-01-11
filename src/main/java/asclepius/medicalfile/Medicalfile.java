@@ -1,10 +1,8 @@
 package asclepius.medicalfile;
 
 import asclepius.MongoDocument;
-import asclepius.nurse.Nurse;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,13 +35,5 @@ public class Medicalfile extends MongoDocument {
     public void removeNurse(UUID uuid) {
         if (nurses.contains(uuid))
             nurses.remove(uuid);
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 }
