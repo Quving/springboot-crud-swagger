@@ -1,7 +1,7 @@
 package asclepius.medicalfile;
 
 import asclepius.MongoDocument;
-import asclepius.patient.Patient;
+import asclepius.nurse.Nurse;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -10,44 +10,32 @@ import java.util.UUID;
 
 @Document(collection = "medicalfiles")
 public class Medicalfile extends MongoDocument {
-    private UUID nurseId;
-    private List<UUID> patientIds;
+    private UUID patientId;
+    private List<UUID> nurses;
 
-    public Medicalfile(UUID nurseId) {
-        this.nurseId = nurseId;
-        patientIds = new ArrayList<>();
+    public UUID getPatientId() {
+        return patientId;
     }
 
-
-    public UUID getNurseUuid() {
-        return nurseId;
+    public void setPatientId(UUID patientId) {
+        this.patientId = patientId;
     }
 
-    public void setNurseUuid(UUID nurse_uuid) {
-        this.nurseId = nurse_uuid;
+    public List<UUID> getNurses() {
+        return nurses;
     }
 
-    public List<UUID> getPatientIds() {
-        return patientIds;
+    public void setNurses(List<UUID> nurses) {
+        this.nurses = nurses;
     }
 
-    public void setPatientIds(List<UUID> patientIds) {
-        this.patientIds = patientIds;
+    public void addNurse(UUID uuid) {
+        if (!nurses.contains(uuid))
+            nurses.add(uuid);
     }
 
-    public void addPatient(Patient patient) {
-        patientIds.add(patient.getUuid());
-    }
-
-    public void addPatient(UUID uuid) {
-        patientIds.add(uuid);
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void removeNurse(UUID uuid) {
+        if (nurses.contains(uuid))
+            nurses.remove(uuid);
     }
 }
