@@ -19,8 +19,8 @@ public class PatientController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
-    public Optional<Patient> getPatient(@PathVariable String id) {
-        return _patientService.getPatient(UUID.fromString(id));
+    public Patient getPatient(@PathVariable String id) {
+        return _patientService.getPatient(UUID.fromString(id)).get();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")

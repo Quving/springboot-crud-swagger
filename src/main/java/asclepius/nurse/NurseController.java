@@ -19,8 +19,8 @@ public class NurseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
-    public Optional<Nurse> getNurse(@PathVariable String id) {
-        return _nurseService.getNurse(UUID.fromString(id));
+    public Nurse getNurse(@PathVariable String id) {
+        return _nurseService.getNurse(UUID.fromString(id)).get();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
