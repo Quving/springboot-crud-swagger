@@ -25,6 +25,17 @@ public class Location {
         other = "";
     }
 
+    public static Location fromJson(String json) {
+        JSONObject jo = new JSONObject(json);
+        String street = jo.getString("street");
+        String country = jo.getString("country");
+        String postalzip = jo.getString("postalzip");
+        String other = jo.getString("other");
+        String city = jo.getString("city");
+        Location location = new Location(street, city, postalzip, country, other);
+
+        return location;
+    }
 
     public String getCountry() {
         return country;
@@ -74,18 +85,6 @@ public class Location {
         jo.put("postalzip", postalzip);
         jo.put("other", other);
         return jo.toString();
-    }
-
-    public static Location fromJson(String json) {
-        JSONObject jo = new JSONObject(json);
-        String street = jo.getString("street");
-        String country = jo.getString("country");
-        String postalzip = jo.getString("postalzip");
-        String other = jo.getString("other");
-        String city = jo.getString("city");
-        Location location = new Location(street, city, postalzip, country, other);
-
-        return location;
     }
 
     public boolean equals(Location location) {
