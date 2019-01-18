@@ -32,8 +32,8 @@ public class MedicalfileController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
-    public Optional<Medicalfile> getMedicalfile(@PathVariable String id) {
-        return medicalfileService.getMedicalfile(UUID.fromString(id));
+    public Medicalfile getMedicalfile(@PathVariable String id) {
+        return medicalfileService.getMedicalfile(UUID.fromString(id)).get();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
