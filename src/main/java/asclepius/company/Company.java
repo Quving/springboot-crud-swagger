@@ -1,4 +1,4 @@
-package asclepius.patient;
+package asclepius.company;
 
 import asclepius.Location;
 import asclepius.MongoDocument;
@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Document(collection = "patients")
-public class Patient extends MongoDocument {
+@Document(collection = "companies")
+public class Company extends MongoDocument {
     private String name;
     private Location location;
 
