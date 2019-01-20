@@ -1,20 +1,21 @@
-package asclepius.nurse;
+package asclepius.employee;
 
 import asclepius.Location;
-import org.springframework.data.annotation.Id;
+import asclepius.MongoDocument;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "nurses")
-public class Nurse {
-    @Id
-    private String uuid;
-    private String name;
+import java.util.UUID;
 
-    public String getUuid() {
+@Document(collection = "employees")
+public class Employee extends MongoDocument {
+    private String name;
+    private Location location;
+
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -33,6 +34,4 @@ public class Nurse {
     public void setLocation(Location location) {
         this.location = location;
     }
-
-    private Location location;
 }
